@@ -1,0 +1,122 @@
+-----------------------------------------------------------
+		DOCUMENTO REFERENCIA PARA 
+	          EL MANEJO DE NUESTRO
+                    PROYECTO DJANGO
+-----------------------------------------------------------
+
+*Al comenzar
+   +Usar en el directorio base "python manage.py runserver <puerto>"
+   El puerto por defecto es el 8000
+   +Esto hace que se corra el servidor django de prueba
+   +Si es la primera vez que se corre el proyecto, se deben activar 
+   las apps que trae Django por defecto, en particular la de la 
+   administracion de la base de datos. Para esto, se debe correr
+   "python manage.py syncdb", que crea las tablas necesarias para
+   poder usar las aplicaciones en discover/settings.py
+
+*Apps
+  +discover_app es una app que registre en nuestro proyecto. Para 
+  hacerlo, primero use "python manage.py startapp discover_app"
+  +Esto crea el directorio discover_app que se ve en el proyecto
+  +Continue agregando las clases de la base de datos a models.py
+  +Para crear una base de datos a partir de models.py, agrege
+  "discover_app" a la lista INSTALLED_APPS en discover/settings.py
+  y volvi a correr "python manage.py syncdb" para que se crearan
+  las tablas
+
+*Administrando la base de datos
+  +Con el server corriendo, entrar a localhost:<puertoserver>/admin
+  +Si todo esta bien, saldra la interfaz de administracion
+  +Es muy intuitiva y facil de entender
+  +Para que una clase de models.py se vea en la interfaz web, se debe
+  registrar en admin.py
+  +Se puede customizar esta pagina de varias maneras, pero no creo que
+  debamos enfocarnos mucho en esto
+
+*Crear una vista
+  +Para crear una vista, primero se debe mapear a un url para que sea
+  accesible desde el sitio.
+  +Para esto, se crea discover_app/urls.py (diferente a urls.py que esta
+  en la carpeta discover)
+  +En este archivo se coloca lo siguiente:
+   
+   from django.conf.urls import patterns, url
+   from discover_app import views
+
+   urlpatterns = patterns('',
+      url(<regex>, 'views.<vista>', name=<nombre>)
+   )
+  
+  Donde cada url en urlpatterns representa una o mas url's unicaa dentro de
+  discover_app. <regex> es una expresion regular que define como son las
+  urls (ej r'^$' es el discover_app/, r'^/pag2/$' es discover_app/pag2, 
+  r'(?P<variable>\d+)/' mapea a un numero dado por una variable [esto se define
+  en views.<vista>], etc)
+
+  +Se debe hacer que el proyecto apunte a las url de discover_app. Para esto se
+  modifica urls.py en discover al agregarle 
+  "url(r'^discover_app/',include(discover_app.urls, namespace="discover_app"))"
+
+  +Luego viene la parte logica de la vista
+  +En views.py de discover_app, se debe definir una funcion por cada views.<vista> definida
+  en los urls, cuyo nombre sea <vista>
+  +La firma de estas funciones es importante si se les esta pasando una variable
+  por url (como cuando la url es r'(?P<variable>\d+)/' por ejemplo)
+  +Primero, toda funcion vista debe recibir un primer parametro "request", que es
+  pasado por django cuando se accesa a la pagina
+  +El resto de los parametros se deben llamar igual a la <variable> definida en el
+  url. Asi cuando un usuario entre al url que haga match con ese regex, se pasara
+  como argumento lo que sea que haya escrito el cliente(o algun link generado por
+  la pagina).
+  
+  +Usualmente una funcion de vista se usa para hacer calculos que generen
+  variables  para al final retornar una llamada a 
+  render(request, <path>, contexto)
+  +<path> es el path del template al cual se le pasaran estos datos(se explican
+  los templates mas abajo)
+  +contexto es un diccionario de python (sintaxis: { 'string': variable }) que
+  representan las variables a pasar al template y como se llamaran en el mismo
+ 
+  +En una vista es util hacer este import: "from django.shortcuts import render,
+  get_object_or_404
+  +Es tambien necesario "from discover_app.models import <objetos de models.py>"
+
+*Templates
+  +Un template es un archivo con extensiones como html que a fin de cuentas
+  representa lo que se mostrara en la pagina
+  +Se recomienda que los templates de una app se guarden en
+  discover_app/discover_app/templates/ para facilitar el trabajo de namespacing
+  a django
+  +Un template es un comun archivo html, con la diferencia de que se tienen tags
+  extra que permiten extender las cosas que se pueden hacer.
+
+     {{ <variable> }}: Retorna el valor de <variable>, el cual es una de las
+     variables retornadas por la funcion vista correspondiente. Si la variable
+     es un objeto se puede accesar a sus atributos tambien. 
+     Ej: {{ Cliente.nombre }}
+     
+     {% for <variable> in <lista> %} ..... {% endfor %}: ejecuta un ciclo python
+
+     {{ forloop.counter }}: Devuelve el contador interno de un for
+
+     "{% url '<vista>' <argumentos> %}": devuelve un url que se puede usar en una
+     etiqueta <a href>. <argumentos> son las variables que se pasan en caso de
+     que '<vista>' mapee a un regex que acepta variables
+
+     {% csrf_token %}: Se usa para proveer seguridad cuando se usa una forma con
+     el metodo POST
+
+     {% load staticfiles %}: Carga los archivos estaticos (imagenes, js,css) que
+     se encuentren el el directorio discover_app/STATIC_URL. STATIC_URL se define
+     en discover/settings.py
+ 
+     {% static "path" %}: Produce el path a el archivo estatico deseado.
+     Este path es relativo a discover_app/STATIC_URL
+
+*Usando imagenes, css y jquery
+  +Django coloca un directorio por defecto en donde todos los archivos estaticos
+  deben ir. Esto se puede cambiar, pero por defecto es discover_app/static.
+  +Es por esto que un template que haga referencia a un archivo estatico deberia
+  usar {% static "path relativo" %} en el src del archivo
+  +NOTA: Para que que esto funcione se debe ejecutar {% load staticfiles %} al
+  comienzo del template
