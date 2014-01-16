@@ -119,9 +119,12 @@
                 <img class="menu_image" id="text4" src="{% static "images/Or checkout.png" %}">
                 <img class="menu_image" id="text5" src="{% static "images/What's new with.png" %}">
                 <img class="menu_image" id="text5_hover" src="{% static "images/What's new with_hover.png" %}">
-                
-                <form id="wn_form" action="" method="get">
-                    <input id="whts_new" type="text" name="whats_new_with">
+               
+                 
+                <form id="wn_form" action="{% url 'discover_app:whatsnew' %}" 
+                                                                 method="post">
+                    {% csrf_token %}
+                    <input id="whats_new" type="text" name="whats_new_with">
                 </form>
 
                 <img class="menu_image" id="text6" src="{% static "images/a specific topic.png" %}">
