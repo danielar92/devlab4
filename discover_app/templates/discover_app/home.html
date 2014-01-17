@@ -7,66 +7,8 @@
         <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
         <script type="text/javascript" src="{% static "js/jquery-1.10.2.js" %}"></script>
         <script src="{% static "js/masonry.pkgd.min.js" %}"></script>
-
-        <script>
-
-            $( document ).ready(
-                function() {
-                    alert( "document loaded" );
-
-                    var $container = $('#container');
-            
-                    // initialize
-                    $container.masonry({
-                        columnWidth: 200,
-                        itemSelector: '.item'
-                    });
-
-                    var msnry = $container.data('masonry');
-    
-                    $( "#text2" )
-                        .mouseenter(
-                            function() {
-                                $(this).hide();
-                                $("#text2_hover").show();
-                            });
-
-                    $( "#text2_hover" )
-                        .mouseleave(
-                            function() {
-                                $(this).hide();
-                                $("#text2").show();
-                            });
-
-                    $( "#text5" )
-                        .mouseenter(
-                            function() {
-                                $(this).hide();
-                                $("#text5_hover").show();
-                            });
-
-                    $( "#text5_hover" )
-                        .mouseleave(
-                            function() {
-                                $(this).hide();
-                                $("#text5").show();
-                            })
-
-                        .click(
-                            function() {
-                                $("#text6").fadeOut();
-                                $("#wn_form").fadeIn();
-                            });
-
-                    $( "#sign_up" ).click(function() {
-                        alert("SIGN UP");
-                        $( "#container" ).hide();
-                    });
-
-
-                });
-
-        </script>
+        <script src="{% static "js/jquery.leanModal.min.js" %}"></script>
+        <script src="{% static "js/functions.js" %}"></script>
 
     </head>
 
@@ -93,13 +35,12 @@
 
 
             <div id="sign_up">
-                <div class="button sign_in" style="color: rgb(173, 66, 66);
-                display: inline-block;
-                position: absolute;
-                right: 17;
-                top: 6;
-                vertical-align: middle;
-                line-height: 50px;">
+                <div class="button sign_in" style="color: rgb(173, 66, 66);                                                       display: inline-block;
+                                                   position: absolute;
+                                                   right: 23;
+                                                   vertical-align: middle;
+                                                   line-height: 50px;"> 
+                    Sign Up
                 </div>
             </div>
 
@@ -109,17 +50,6 @@
 
         <center>
             <div id="main">
-
-<!--
-            <form action="" method="get">
-                <input type="submit" value="Discover">
-            </form>
-
-            <form action="" method="get">
-             <input type="text" name="url">
-                <input type="submit" value="What's new with this?">
-            </form>
-</!-->
 
             <div id="container">
                 
@@ -144,6 +74,39 @@
                 <img class="menu_image" id="text6" src="{% static "images/a specific topic.png" %}">
             </div>
 
+            <div id="signup">
+                <div id="signup-ct">
+                    <div id="signup-header">
+                        <h2>Registration Form</h2>
+                        <a class="modal_close" href="#"></a>
+                    </div>
+
+                    <form action="">
+
+                        <div class="txt-fld">
+                            <label for="">Username</label>
+                            <input id="" class="good_input" name="" type="text">
+                        </div>
+
+                        <div class="txt-fld">
+                            <label for="">Email address</label>
+                            <input id="" name="" type="text">
+                        </div>
+
+                        <div class="txt-fld">
+                            <label for="">Password</label>
+                            <input id="" name="" type="text">
+                        </div>
+
+                        <div class="btn-fld">
+                            <button type="submit">Sign Up »</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>            
+
             <div id="footer">
                 <div class="h_bar"></div>
                 <div class="authors"> Daniela Rodriguez | 
@@ -153,6 +116,7 @@
             </div>
 
         </div>
+
         </center>
 
     

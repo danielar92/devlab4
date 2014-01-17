@@ -7,63 +7,8 @@
         <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
         <script type="text/javascript" src="{% static "js/jquery-1.10.2.js" %}"></script>
         <script src="{% static "js/masonry.pkgd.min.js" %}"></script>
-
-        <script>
-
-            $( document ).ready(
-                function() {
-                    alert( "document loaded" );
-
-                    $("#siteloader").html('<object data="http://visual.ly/" />');
-                   // $("#siteloader").html('<object data="https://system.netsuite.com/pages/customerlogin.jsp?country=US" />');
-
-                    var $container = $('#container');
-            
-                    // initialize
-                    $container.masonry({
-                        columnWidth: 200,
-                        itemSelector: '.item'
-                    });
-
-                    var msnry = $container.data('masonry');
-    
-                    $( "#text2" )
-                        .mouseenter(
-                            function() {
-                                $(this).hide();
-                                $("#text2_hover").show();
-                            });
-
-                    $( "#text2_hover" )
-                        .mouseleave(
-                            function() {
-                                $(this).hide();
-                                $("#text2").show();
-                            });
-
-                    $( "#text5" )
-                        .mouseenter(
-                            function() {
-                                $(this).hide();
-                                $("#text5_hover").show();
-                            });
-
-                    $( "#text5_hover" )
-                        .mouseleave(
-                            function() {
-                                $(this).hide();
-                                $("#text5").show();
-                            })
-
-                        .click(
-                            function() {
-                                $("#text6").fadeOut();
-                                $("#wn_form").fadeIn();
-                            });
-
-                });
-
-        </script>
+        <script src="{% static "js/jquery.leanModal.min.js" %}"></script>
+        <script src="{% static "js/functions.js" %}"></script>
 
     </head>
 
@@ -78,15 +23,19 @@
                                         left: 50px;">
                 Daniela Rodriguez | Jose Montenegro | Michelle Fernandez</div>
 
-            <div id="discover_bar">
-
+            <div id="discover_bar" style="position: absolute;
+                                          top: 16;
+                                          left: 600;">
+<!-- 
                 <img src="{% static "images/thumbs_up_icon.png" %}" class="thumbs">
+</!-->
 
                 <form id="discover_form" action="" method="get">
                     <input class="button discover" type="image" alt="submit" value="" src="{% static "images/DISCOVER.png" %}">
                 </form>
-
+<!-- 
                 <img src="{% static "images/thumbs_down_icon.png" %}" class="thumbs">
+</!-->
 
             </div>
 
@@ -106,23 +55,56 @@
                 <input class="button sign_in" type="submit" value="sign in">
             </form>
 
-            <form id="sign_up" action="" method="get">
-                <input class="button sign_in" type="submit" value="sign up" style="color: rgb(173, 66, 66);
-                display: inline-block;
-                position: absolute;
-                right: 17;
-                top: 6;
-                vertical-align: middle;
-                line-height: 50px;">
-            </form>
-
+            <div id="sign_up">
+                <div class="button sign_in" style="color: rgb(173, 66, 66);                                                       display: inline-block;
+                                                   position: absolute;
+                                                   right: 23;
+                                                   vertical-align: middle;
+                                                   line-height: 50px;"> 
+                    Sign Up
+                </div>
             </div>
+
+        </div>
 
         </header>
 
         <center>
 
             <div id="siteloader"></div>
+
+            <div id="signup">
+                <div id="signup-ct">
+                    <div id="signup-header">
+                        <h2>Registration Form</h2>
+                        <a class="modal_close" href="#"></a>
+                    </div>
+
+                    <form action="">
+
+                        <div class="txt-fld">
+                            <label for="">Username</label>
+                            <input id="" class="good_input" name="" type="text">
+                        </div>
+
+                        <div class="txt-fld">
+                            <label for="">Email address</label>
+                            <input id="" name="" type="text">
+                        </div>
+
+                        <div class="txt-fld">
+                            <label for="">Password</label>
+                            <input id="" name="" type="text">
+                        </div>
+
+                        <div class="btn-fld">
+                            <button type="submit">Sign Up »</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>            
 
         </center>
     

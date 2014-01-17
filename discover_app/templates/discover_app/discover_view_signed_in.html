@@ -7,63 +7,8 @@
         <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
         <script type="text/javascript" src="{% static "js/jquery-1.10.2.js" %}"></script>
         <script src="{% static "js/masonry.pkgd.min.js" %}"></script>
-
-        <script>
-
-            $( document ).ready(
-                function() {
-                    alert( "document loaded" );
-
-                    $("#siteloader").html('<object data="http://visual.ly/" />');
-                   // $("#siteloader").html('<object data="https://system.netsuite.com/pages/customerlogin.jsp?country=US" />');
-
-                    var $container = $('#container');
-            
-                    // initialize
-                    $container.masonry({
-                        columnWidth: 200,
-                        itemSelector: '.item'
-                    });
-
-                    var msnry = $container.data('masonry');
-    
-                    $( "#text2" )
-                        .mouseenter(
-                            function() {
-                                $(this).hide();
-                                $("#text2_hover").show();
-                            });
-
-                    $( "#text2_hover" )
-                        .mouseleave(
-                            function() {
-                                $(this).hide();
-                                $("#text2").show();
-                            });
-
-                    $( "#text5" )
-                        .mouseenter(
-                            function() {
-                                $(this).hide();
-                                $("#text5_hover").show();
-                            });
-
-                    $( "#text5_hover" )
-                        .mouseleave(
-                            function() {
-                                $(this).hide();
-                                $("#text5").show();
-                            })
-
-                        .click(
-                            function() {
-                                $("#text6").fadeOut();
-                                $("#wn_form").fadeIn();
-                            });
-
-                });
-
-        </script>
+        <script src="{% static "js/jquery.leanModal.min.js" %}"></script>
+        <script src="{% static "js/functions.js" %}"></script>
 
     </head>
 
