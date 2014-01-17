@@ -58,12 +58,6 @@
                                 $("#wn_form").fadeIn();
                             });
 
-                    $( "#sign_up" ).click(function() {
-                        alert("SIGN UP");
-                        $( "#container" ).hide();
-                    });
-
-
                 });
 
         </script>
@@ -85,23 +79,13 @@
                     </p>
                 {% endif %} </!-->
 
-            <form id="sign_in_form" action="" method="get">
-                <input id="sign_in" type="text" name="username" placeholder="username">
-                <input id="sign_in" type="password" name="password" placeholder="password">
-                <input class="button sign_in" type="submit" value="sign in">
-            </form>
+                <div id="username"> username </div>
 
-
-            <div id="sign_up">
-                <div class="button sign_in" style="color: rgb(173, 66, 66);
-                display: inline-block;
-                position: absolute;
-                right: 17;
-                top: 6;
-                vertical-align: middle;
-                line-height: 50px;">
-                </div>
-            </div>
+                <img src="{% static "images/user_24x32.png" %}" style="display: inline-block;
+                                                                        position: absolute;
+                                                                        vertical-align: middle;
+                                                                        right: 30;
+                                                                        top: 16;">
 
             </div>
 

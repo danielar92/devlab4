@@ -14,6 +14,9 @@
                 function() {
                     alert( "document loaded" );
 
+                    $("#siteloader").html('<object data="http://visual.ly/" />');
+                   // $("#siteloader").html('<object data="https://system.netsuite.com/pages/customerlogin.jsp?country=US" />');
+
                     var $container = $('#container');
             
                     // initialize
@@ -58,12 +61,6 @@
                                 $("#wn_form").fadeIn();
                             });
 
-                    $( "#sign_up" ).click(function() {
-                        alert("SIGN UP");
-                        $( "#container" ).hide();
-                    });
-
-
                 });
 
         </script>
@@ -71,9 +68,27 @@
     </head>
 
     <body>
+
         <header>
 
-            <div id="navigation_bar">
+        <div id="navigation_bar">
+
+            <div class="authors" style="display: inline-block;
+                                        position: absolute;
+                                        left: 50px;">
+                Daniela Rodriguez | Jose Montenegro | Michelle Fernandez</div>
+
+            <div id="discover_bar">
+
+                <img src="{% static "images/thumbs_up_icon.png" %}" class="thumbs">
+
+                <form id="discover_form" action="" method="get">
+                    <input class="button discover" type="image" alt="submit" value="" src="{% static "images/DISCOVER.png" %}">
+                </form>
+
+                <img src="{% static "images/thumbs_down_icon.png" %}" class="thumbs">
+
+            </div>
 
     <!--        {% if logged %}
                     <p style="color: green;">
@@ -91,70 +106,25 @@
                 <input class="button sign_in" type="submit" value="sign in">
             </form>
 
-
-            <div id="sign_up">
-                <div class="button sign_in" style="color: rgb(173, 66, 66);
+            <form id="sign_up" action="" method="get">
+                <input class="button sign_in" type="submit" value="sign up" style="color: rgb(173, 66, 66);
                 display: inline-block;
                 position: absolute;
                 right: 17;
                 top: 6;
                 vertical-align: middle;
                 line-height: 50px;">
-                </div>
-            </div>
+            </form>
 
             </div>
 
         </header>
 
         <center>
-            <div id="main">
 
-<!--
-            <form action="" method="get">
-                <input type="submit" value="Discover">
-            </form>
+            <div id="siteloader"></div>
 
-            <form action="" method="get">
-             <input type="text" name="url">
-                <input type="submit" value="What's new with this?">
-            </form>
-</!-->
-
-            <div id="container">
-                
-                <img class="menu_image" id="welcome" src="{% static "images/Welcome to.png" %}">
-                <img class="menu_image" id="name" src="{% static "images/APP_NAME.png" %}">
-                <img class="menu_image" id="text1" src="{% static "images/You can either.png" %}">
-
-                <img class="menu_image" id="text2" src="{% static "images/DISCOVER.png" %}">
-
-                <form action="" method="get">
-                    <img type="submit" class="menu_image" id="text2_hover" src="{% static "images/DISCOVER_hover.png" %}">
-                </form>
-                <img class="menu_image" id="text3" src="{% static "images/new pages over the web.png" %}">
-                <img class="menu_image" id="text4" src="{% static "images/Or checkout.png" %}">
-                <img class="menu_image" id="text5" src="{% static "images/What's new with.png" %}">
-                <img class="menu_image" id="text5_hover" src="{% static "images/What's new with_hover.png" %}">
-                
-                <form id="wn_form" action="" method="get">
-                    <input id="whts_new" type="text" name="whats_new_with">
-                </form>
-
-                <img class="menu_image" id="text6" src="{% static "images/a specific topic.png" %}">
-            </div>
-
-            <div id="footer">
-                <div class="h_bar"></div>
-                <div class="authors"> Daniela Rodriguez | 
-                                      Jose Montenegro | 
-                                      Michelle Fernandez 
-                </div>
-            </div>
-
-        </div>
         </center>
-
     
     </body>
 
